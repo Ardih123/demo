@@ -10,8 +10,15 @@ import com.example.demo.modelos.Pessoa;
 @Service
 public class ServicoPessoa {
 
-	String data;
-	ArrayList<String> palavras = new ArrayList<String>();
+	/*
+	 * /addPessoa
+	 * /updatePessoa
+	 * /deletePessoa/{id}
+	 * /getAllPessoas
+	 * /getPessoaById/{id}
+	 * 
+	 */
+	
 	ArrayList<Pessoa> listaPessoas = new ArrayList<Pessoa>();
 	
 	public List<Pessoa> addPessoa(Pessoa pessoa) {
@@ -20,12 +27,6 @@ public class ServicoPessoa {
 		return listaPessoas;
 	}
 	
-    public List<Pessoa> deletePessoa(String id){
-    	System.out.println(id);
-    	listaPessoas.remove(id);
-    	return listaPessoas;
-    }
-    
     public List<Pessoa> updatePessoa(Pessoa p){
     	System.out.println(p);
     	listaPessoas.add(p);
@@ -36,5 +37,19 @@ public class ServicoPessoa {
         catch(Exception e){
         	
         }
+    }
+    
+    public List<Pessoa> deletePessoa(String id){
+    	System.out.println(id);
+    	listaPessoas.remove(id);
+    	return listaPessoas;
+    }
+    
+    public List<Pessoa> getAllPessoas() {
+    	return listaPessoas;
+    }
+    
+    public void getPessoaById() {
+    	
     }
 }

@@ -25,18 +25,17 @@ public class ControladorPessoa {
 		this.servicoPessoa = servicoPessoa;
 	}
     
+	/*
+	 * /addPessoa
+	 * /updatePessoa
+	 * /deletePessoa/{id}
+	 * /getAllPessoas
+	 * /getPessoaById/{id}
+	 * 
+	 */
+	
     @PostMapping("/addPessoa")
     public List<Pessoa> addPessoa(@RequestBody Pessoa pessoa){
-    	if(pessoa.getNome() != null || pessoa.getNome().isBlank()) {
-    		return Collections.emptyList();
-    	}
-    	
-    	List<Pessoa> ppl = servicoPessoa.addPessoa(pessoa);
-    	return ppl;
-    }
-    
-    @DeleteMapping("/deletePessoa/{id}")
-    public String deletePessoa(@PathVariable String id){
     	if(pessoa.getNome() != null || pessoa.getNome().isBlank()) {
     		return Collections.emptyList();
     	}
@@ -66,4 +65,23 @@ public class ControladorPessoa {
         return "Pessoa nao existe";
     }
     
+    @DeleteMapping("/deletePessoa/{id}")
+    public String deletePessoa(@PathVariable String id){
+    	if(pessoa.getNome() != null || pessoa.getNome().isBlank()) {
+    		return Collections.emptyList();
+    	}
+    	
+    	List<Pessoa> ppl = servicoPessoa.addPessoa(pessoa);
+    	return ppl;
+    }
+
+    @GetMapping("/getAllPessoas")
+    public List<Pessoa> getAllPessoas() {
+    	return servicoPessoa;
+    }
+    
+    @GetMapping("/getPessoaById/{id}")
+    public void getAllPessoasById(@PathVariable String id) {
+    	
+    }
 }
