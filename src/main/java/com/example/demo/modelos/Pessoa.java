@@ -37,6 +37,14 @@ public class Pessoa {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "{\r\n"
+				+ "    \"id\": "+id+",\r\n"
+				+ "    \"nome\": "+nome+",\r\n"
+				+ "    \"idade\": "+idade+"\r\n"
+				+ "}";
+	}
 	
 }

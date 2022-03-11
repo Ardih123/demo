@@ -1,6 +1,5 @@
 package com.example.demo.controladores;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,17 +25,17 @@ public class ControladorPessoa {
 	}
     
 	/*
-	 * /addPessoa
-	 * /updatePessoa
-	 * /deletePessoa/{id}
-	 * /getAllPessoas
-	 * /getPessoaById/{id}
+	 * +/addPessoa
+	 * +/updatePessoa
+	 * +/deletePessoa/{id}
+	 * +/getAllPessoas
+	 * +/getPessoaById/{id}
 	 * 
 	 */
 	
     @PostMapping("/addPessoa")
     public List<Pessoa> addPessoa(@RequestBody Pessoa pessoa){
-    	if(pessoa.getNome() != null || pessoa.getNome().isBlank()) {
+    	if(pessoa.getNome() == null || pessoa.getNome().isBlank()) {
     		return Collections.emptyList();
     	}
     	
@@ -45,43 +44,24 @@ public class ControladorPessoa {
     }
     
     @PutMapping("/updatePessoa")
-    public String updatePessoa(@RequestBody Pessoa p){
-        for (Pessoa pessoaAux: pessoa) {
-            if (pessoaAux.getId() == p.getId()) {
-                if(p.getIdade() > 0){
-                    pessoaAux.setIdade(p.getIdade());
-                    return "idade modificada";
-                }
-
-                if (p.getNome()!= null && !p.getNome().isBlank()){
-                    pessoaAux.setNome(p.getNome());
-                    return "nome modificado";
-                }
-
-                return "id encontrado";
-            }
-        }
-
-        return "Pessoa nao existe";
+    public String updatePessoa(@RequestBody Pessoa pessoa){
+    	String ppl = servicoPessoa.updatePessoa(pessoa);
+    	return ppl;
     }
     
     @DeleteMapping("/deletePessoa/{id}")
     public String deletePessoa(@PathVariable String id){
-    	if(pessoa.getNome() != null || pessoa.getNome().isBlank()) {
-    		return Collections.emptyList();
-    	}
-    	
-    	List<Pessoa> ppl = servicoPessoa.addPessoa(pessoa);
+    	String ppl = servicoPessoa.deletePessoa(id);
     	return ppl;
     }
 
     @GetMapping("/getAllPessoas")
     public List<Pessoa> getAllPessoas() {
-    	return servicoPessoa;
+    	return servicoPessoa.getAllPessoas();
     }
     
     @GetMapping("/getPessoaById/{id}")
-    public void getAllPessoasById(@PathVariable String id) {
-    	
+    public String getPessoasById(@PathVariable String id) {
+    	return servicoPessoa.getPessoaById(id);
     }
 }
