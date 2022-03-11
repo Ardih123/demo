@@ -24,33 +24,6 @@ public class ControladorPessoa {
 	public ControladorPessoa(ServicoPessoa servicoPessoa) {
 		this.servicoPessoa = servicoPessoa;
 	}
-	
-    @GetMapping("/teste")
-    public String teste(){
-        return "Look behind you amigo";
-    }
-    
-    @GetMapping("/info")
-    public String info(){
-        return data;
-    }
-    
-    @GetMapping("/getPalavras")
-    public ArrayList<String> getPalavras(){
-        return palavras;
-    }
-    
-    @GetMapping("/getPessoa")
-    public ArrayList<Pessoa> getPessoa(){
-        return pessoa;
-    }
-    
-    @PostMapping("/post")
-    public String post(@RequestBody String info){
-    	palavras.add(info);
-    	data = info;
-    	return info;
-    }
     
     @PostMapping("/addPessoa")
     public List<Pessoa> addPessoa(@RequestBody Pessoa pessoa){
