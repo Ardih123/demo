@@ -15,6 +15,7 @@ public class Empresa {
 		this.morada = morada;
 		listaPessoas = new ArrayList<Pessoa>();
 		empresaId = idEmpresa++;
+		numeroFuncionariosAtual = listaPessoas.size();
 	}
 
 	public int getEmpresaId() {
@@ -52,13 +53,14 @@ public class Empresa {
 	@Override
 	public String toString() {
 		return "{\r\n"
-				+ "    \"nome\": "+nome+",\r\n"
-				+ "    \"morada\": "+morada+",\r\n"
-				+ "    \"numeroFuncionariosAtual\": "+getNumeroFuncionariosAtual()+",\r\n"
-				+ "    \"numeroFuncionariosDesdeCriacao\": "+getNumeroFuncionariosDesdeCriacao()+",\r\n"
-				+ "    \"empresaId\": "+empresaId+",\r\n"
-				+ "    \"listaPessoas\": "+getListaPessoas()+"\r\n"
+				+ "    \"nome\": "+ getNome() +",\r\n"
+				+ "    \"morada\": "+ getMorada() +",\r\n"
+				+ "    \"numeroFuncionariosAtual\": "+ getNumeroFuncionariosAtual() +",\r\n"
+				+ "    \"numeroFuncionariosDesdeCriacao\": "+ getNumeroFuncionariosDesdeCriacao() +",\r\n"
+				+ "    \"empresaId\": "+ getEmpresaId() +",\r\n"
+				+ "    \"listaPessoas\": "+ getListaPessoas() +"\r\n"
 				+ "}";
 	}
+	
 	
 }

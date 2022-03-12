@@ -1,6 +1,7 @@
 package com.example.demo.servico;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -21,52 +22,54 @@ public class ServicoPessoa {
 	
 	List<Pessoa> listaPessoas = new ArrayList<Pessoa>();
 	
-	public List<Pessoa> addPessoa(Pessoa pessoa) {
-		listaPessoas.add(pessoa);
+	public List<Pessoa> addPessoa(Pessoa aPessoa) {
+		if(aPessoa.getNome() != null || !aPessoa.getNome().isBlank() || aPessoa.getIdade() > 0) {
+			listaPessoas.add(aPessoa);
+		}
+		else {
+			return Collections.emptyList();
+		}
 		return listaPessoas;
 	}
 	
-    public String updatePessoa(Pessoa p){
+    public String updatePessoa(Pessoa aPessoa){
     	for (Pessoa pessoaAux: listaPessoas) {
-            if (pessoaAux.getId() == p.getId()) {
-                if(p.getIdade() > 0){
-                    pessoaAux.setIdade(p.getIdade());
+            if (pessoaAux.getId() == aPessoa.getId()) {
+                if(aPessoa.getIdade() > 0){
+                    pessoaAux.setIdade(aPessoa.getIdade());
                 }
-
-                if (p.getNome()!= null && !p.getNome().isBlank()){
-                    pessoaAux.setNome(p.getNome());
+                if (aPessoa.getNome()!= null && !aPessoa.getNome().isBlank()){
+                    pessoaAux.setNome(aPessoa.getNome());
                 }
-
-                return "id encontrado";
+                return "id "+ pessoaAux.getId() +" modificado";
             }
         }
-
-        return "Pessoa nao existe";
+    	return "id "+ aPessoa.getId() +" não existe";
     }
     
-    public String deletePessoa(String id){
-    	Integer idPessoa = Integer.valueOf(id);
-    	for(Pessoa ppl : listaPessoas) {
-    		if(ppl.getId() == idPessoa) {
-    			listaPessoas.remove(ppl);
-    			return "pessoa removida";
+    public String deletePessoa(String aId){
+    	Integer idPessoa = Integer.valueOf(aId);
+    	for(Pessoa pessoaAux : listaPessoas) {
+    		if(pessoaAux.getId() == idPessoa) {
+    			listaPessoas.remove(pessoaAux);
+    			return "id "+ pessoaAux.getId() +" removido";
     		}
     	}
-    	return "id nao encontrado";
+    	return "id "+ idPessoa +" não existe";
     }
     
     public List<Pessoa> getAllPessoas() {
     	return listaPessoas;
     }
     
-    public String getPessoaById(String id) {
-    	Integer idPessoa = Integer.valueOf(id);
-    	for(Pessoa ppl : listaPessoas) {
-    		if(ppl.getId() == idPessoa) {
-    			return ppl.toString();
+    public String getPessoaById(String aId) {
+    	Integer idPessoa = Integer.valueOf(aId);
+    	for(Pessoa pessoaAux : listaPessoas) {
+    		if(pessoaAux.getId() == idPessoa) {
+    			return pessoaAux.toString();
     		}
     	}
-    	return "erro no id";
+    	return "id "+ idPessoa +" não existe";
     }
     
 }

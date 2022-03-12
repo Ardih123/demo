@@ -1,6 +1,5 @@
 package com.example.demo.controladores;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,34 +24,27 @@ public class ControladorEmpresa {
 	}
 	
 	/*
-	 * /addEmpresa 
-	 * /updateEmpresa 
-	 * /deleteEmpresaById/{id} 
-	 * /getAllEmpresas
-	 * /getEmpresaById/{id}
+	 * +/addEmpresa 
+	 * +/updateEmpresa 
+	 * +/deleteEmpresaById/{id} 
+	 * +/getAllEmpresas
+	 * +/getEmpresaById/{id}
 	 * 
 	 */
 
 	@PostMapping("/addEmpresa")
-    public List<Empresa> addEmpresa(@RequestBody Empresa empresa){
-    	if(empresa.getNome() == null || empresa.getNome().isBlank()) {
-    		return Collections.emptyList();
-    	}
-    	
-    	List<Empresa> emp = servicoEmpresa.addEmpresa(empresa);
-    	return emp;
+    public List<Empresa> addEmpresa(@RequestBody Empresa aEmpresa){
+    	return servicoEmpresa.addEmpresa(aEmpresa);
     }
     
     @PutMapping("/updateEmpresa")
-    public String updateEmpresa(@RequestBody Empresa empresa){
-    	String emp = servicoEmpresa.updateEmpresa(empresa);
-    	return emp;
+    public String updateEmpresa(@RequestBody Empresa aEmpresa){
+    	return servicoEmpresa.updateEmpresa(aEmpresa);
     }
     
     @DeleteMapping("/deleteEmpresaById/{id}")
-    public String deleteEmpresaById(@PathVariable String id){
-    	String emp = servicoEmpresa.deleteById(id);
-    	return emp;
+    public String deleteEmpresaById(@PathVariable String aId){
+    	return servicoEmpresa.deleteById(aId);
     }
 
     @GetMapping("/getAllEmpresas")
@@ -61,8 +53,8 @@ public class ControladorEmpresa {
     }
     
     @GetMapping("/getEmpresaById/{id}")
-    public String getEmpresaById(@PathVariable String id) {
-    	return servicoEmpresa.getEmpresaById(id);
+    public String getEmpresaById(@PathVariable String aId) {
+    	return servicoEmpresa.getEmpresaById(aId);
     }
 	
 }

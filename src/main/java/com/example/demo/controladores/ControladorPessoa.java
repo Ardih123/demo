@@ -1,6 +1,5 @@
 package com.example.demo.controladores;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,25 +33,18 @@ public class ControladorPessoa {
 	 */
 	
     @PostMapping("/addPessoa")
-    public List<Pessoa> addPessoa(@RequestBody Pessoa pessoa){
-    	if(pessoa.getNome() == null || pessoa.getNome().isBlank()) {
-    		return Collections.emptyList();
-    	}
-    	
-    	List<Pessoa> ppl = servicoPessoa.addPessoa(pessoa);
-    	return ppl;
+    public List<Pessoa> addPessoa(@RequestBody Pessoa aPessoa){  	
+    	return servicoPessoa.addPessoa(aPessoa);
     }
     
     @PutMapping("/updatePessoa")
-    public String updatePessoa(@RequestBody Pessoa pessoa){
-    	String ppl = servicoPessoa.updatePessoa(pessoa);
-    	return ppl;
+    public String updatePessoa(@RequestBody Pessoa aPessoa){
+    	return servicoPessoa.updatePessoa(aPessoa);
     }
     
     @DeleteMapping("/deletePessoa/{id}")
-    public String deletePessoa(@PathVariable String id){
-    	String ppl = servicoPessoa.deletePessoa(id);
-    	return ppl;
+    public String deletePessoa(@PathVariable String aId){
+    	return servicoPessoa.deletePessoa(aId);
     }
 
     @GetMapping("/getAllPessoas")
@@ -61,7 +53,7 @@ public class ControladorPessoa {
     }
     
     @GetMapping("/getPessoaById/{id}")
-    public String getPessoasById(@PathVariable String id) {
-    	return servicoPessoa.getPessoaById(id);
+    public String getPessoasById(@PathVariable String aId) {
+    	return servicoPessoa.getPessoaById(aId);
     }
 }

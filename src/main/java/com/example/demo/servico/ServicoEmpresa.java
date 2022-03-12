@@ -1,6 +1,7 @@
 package com.example.demo.servico;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -11,60 +12,65 @@ import com.example.demo.modelos.Empresa;
 public class ServicoEmpresa {
 	
 	/*
-	 * /addEmpresa 
-	 * /updateEmpresa 
-	 * /deleteEmpresaById/{id} 
-	 * /getAllEmpresas
-	 * /getEmpresaById/{id}
+	 * +/addEmpresa 
+	 * +/updateEmpresa 
+	 * +/deleteEmpresaById/{id} 
+	 * +/getAllEmpresas
+	 * +/getEmpresaById/{id}
 	 * 
 	 */
 
 	List<Empresa> listaEmpresa = new ArrayList<Empresa>();
 	
-	public List<Empresa> addEmpresa(Empresa empresa) {
-		listaEmpresa.add(empresa);
+	public List<Empresa> addEmpresa(Empresa aEmpresa) {
+		if(aEmpresa.getNome() != null || !aEmpresa.getNome().isBlank() || aEmpresa.getMorada() != null || !aEmpresa.getMorada().isBlank()) {
+			listaEmpresa.add(aEmpresa);
+    	}
+		else {
+			return Collections.emptyList();
+		}
 		return listaEmpresa;
 	}
 	
-	public String updateEmpresa(Empresa e) {
-		for(Empresa empresa : listaEmpresa) {
-			if(empresa.getEmpresaId() == e.getEmpresaId()) {
-				if(e.getNome() != null || !e.getNome().isBlank()) {
-					empresa.setNome(e.getNome());
+	public String updateEmpresa(Empresa aEmpresa) {
+		for(Empresa empresaAux : listaEmpresa) {
+			if(empresaAux.getEmpresaId() == aEmpresa.getEmpresaId()) {
+				if(aEmpresa.getNome() != null || !aEmpresa.getNome().isBlank()) {
+					empresaAux.setNome(aEmpresa.getNome());
 				}
-				if(e.getMorada() != null || !e.getMorada().isBlank()) {
-					empresa.setMorada(e.getMorada());
+				if(aEmpresa.getMorada() != null || !aEmpresa.getMorada().isBlank()) {
+					empresaAux.setMorada(aEmpresa.getMorada());
 				}
-				return "empresa atualizada";
+				return "empresa id "+ empresaAux.getEmpresaId() +" atualizada";
 			}
 			
 		}
-		return "empresa nao existe";
+		return "empresa id "+ aEmpresa.getEmpresaId() +" não existe";
 	}
 	
-	public String deleteById(String id) {
-    	Integer idEmpresa = Integer.valueOf(id);
-    	for(Empresa empresa : listaEmpresa) {
-    		if(empresa.getEmpresaId() == idEmpresa) {
-    			listaEmpresa.remove(empresa);
-    			return "empresa removida";
+	public String deleteById(String aId) {
+    	Integer idEmpresa = Integer.valueOf(aId);
+    	for(Empresa empresaAux : listaEmpresa) {
+    		if(empresaAux.getEmpresaId() == idEmpresa) {
+    			listaEmpresa.remove(empresaAux);
+    			return "empresa id "+ empresaAux.getEmpresaId() +" removida";
     		}
     	}
-    	return "id nao encontrado";
+    	return "empresa id "+ idEmpresa +" não existe";
 	}
 	
 	public List<Empresa> getAllEmpresas(){
 		return listaEmpresa;
 	}
 	
-	public String getEmpresaById(String id) {
-    	Integer idEmpresa = Integer.valueOf(id);
-    	for(Empresa empresa : listaEmpresa) {
-    		if(empresa.getEmpresaId() == idEmpresa) {
-    			return empresa.toString();
+	public String getEmpresaById(String aId) {
+    	Integer idEmpresa = Integer.valueOf(aId);
+    	for(Empresa empresaAux : listaEmpresa) {
+    		if(empresaAux.getEmpresaId() == idEmpresa) {
+    			return empresaAux.toString();
     		}
     	}
-    	return "id nao encontrado";
+    	return "empresa id "+ idEmpresa +" não existe";
 	}
 	
 }
