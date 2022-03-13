@@ -3,11 +3,14 @@ package com.example.demo.modelos;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.OneToMany;
+
 public class Empresa {
 
+	@OneToMany(mappedBy="Empresa")
+	private List<Pessoa> listaPessoas;
 	private String nome, morada;
 	private int numeroFuncionariosAtual, numeroFuncionariosDesdeCriacao, empresaId;
-	private List<Pessoa> listaPessoas;
 	private static int idEmpresa = 0;
 	
 	public Empresa(String nome, String morada, List<Pessoa> listaPessoas) {

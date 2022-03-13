@@ -1,7 +1,10 @@
 package com.example.demo.modelos;
 
+import javax.persistence.ManyToOne;
+
 public class Pessoa {
 
+	@ManyToOne
 	private int id = 0;
 	private static int ids = 0;
 	private String nome;
