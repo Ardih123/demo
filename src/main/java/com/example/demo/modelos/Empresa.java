@@ -1,35 +1,57 @@
 package com.example.demo.modelos;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Empresa")
+@IdClass(Empresa.class)
 
-public class Empresa {
+public class Empresa implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@OneToMany(mappedBy="Empresa")
-	private List<Pessoa> listaPessoas;
-	private String nome, morada;
-	private int numeroFuncionariosAtual, numeroFuncionariosDesdeCriacao, empresaId;
-	private static int idEmpresa = 0;
+    @Column(name = "empresaId")
+	private int empresaId;
 	
-	public Empresa(String nome, String morada, List<Pessoa> listaPessoas) {
-		this.nome = nome;
-		this.morada = morada;
-		listaPessoas = new ArrayList<Pessoa>();
-		empresaId = idEmpresa++;
-		numeroFuncionariosAtual = listaPessoas.size();
-	}
+	//@OneToMany(mappedBy="Empresa")
+	//private List<Pessoa> listaPessoas;
+	
+	@Id
+    @Column(name = "nome")
+	private String nome;
+	
+	@Id
+    @Column(name = "morada")
+	private String morada;
+	
+	@Id
+    @Column(name = "numeroFuncionariosAtual")
+	private int numeroFuncionariosAtual;
+	
+	@Id
+    @Column(name = "numeroFuncionariosDesdeCriacao")
+	private int numeroFuncionariosDesdeCriacao;
+	
+	//private static int idEmpresa;
+	
+	/*
+	 * public Empresa(String nome, String morada, List<Pessoa> listaPessoas) {
+	 * this.nome = nome; this.morada = morada; listaPessoas = new
+	 * ArrayList<Pessoa>(); empresaId = idEmpresa++; numeroFuncionariosAtual =
+	 * listaPessoas.size(); }
+	 */
 
 	public int getEmpresaId() {
 		return empresaId;
@@ -51,9 +73,9 @@ public class Empresa {
 		return numeroFuncionariosDesdeCriacao;
 	}
 
-	public List<Pessoa> getListaPessoas() {
-		return listaPessoas;
-	}
+	/*
+	 * public List<Pessoa> getListaPessoas() { return listaPessoas; }
+	 */
 
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -63,17 +85,15 @@ public class Empresa {
 		this.morada = morada;
 	}
 
-	@Override
-	public String toString() {
-		return "{\r\n"
-				+ "    \"nome\": "+ getNome() +",\r\n"
-				+ "    \"morada\": "+ getMorada() +",\r\n"
-				+ "    \"numeroFuncionariosAtual\": "+ getNumeroFuncionariosAtual() +",\r\n"
-				+ "    \"numeroFuncionariosDesdeCriacao\": "+ getNumeroFuncionariosDesdeCriacao() +",\r\n"
-				+ "    \"empresaId\": "+ getEmpresaId() +",\r\n"
-				+ "    \"listaPessoas\": "+ getListaPessoas() +"\r\n"
-				+ "}";
-	}
+	/*
+	 * @Override public String toString() { return "{\r\n" + "    \"nome\": "+
+	 * getNome() +",\r\n" + "    \"morada\": "+ getMorada() +",\r\n" +
+	 * "    \"numeroFuncionariosAtual\": "+ getNumeroFuncionariosAtual() +",\r\n" +
+	 * "    \"numeroFuncionariosDesdeCriacao\": "+
+	 * getNumeroFuncionariosDesdeCriacao() +",\r\n" + "    \"empresaId\": "+
+	 * getEmpresaId() +",\r\n" + "    \"listaPessoas\": "+ getListaPessoas() +"\r\n"
+	 * + "}"; }
+	 */
 	
 	
 }
